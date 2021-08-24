@@ -61,6 +61,10 @@ param (
 
 begin{
 
+}
+
+process {
+    
     #Region Headers
     $headers = @{}
     $headers.add('authorization',('Bearer {0}' -f $APIKey))
@@ -115,10 +119,7 @@ begin{
     Remove-Variable -Name personalizations -Force
     #EndRegion
     #EndRegion
-}
 
-process {
-    $data.content.value.gettype()
     try { 
         Invoke-WebRequest -Uri 'https://api.sendgrid.com/v3/mail/send' -Headers $headers -Body ($data | ConvertTo-Json -Depth 4) -Method POST
     }
